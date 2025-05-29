@@ -10,7 +10,7 @@ function App() {
   const [error, setError] = useState('');
   const [locationUsed, setLocationUsed] = useState(false);
 
-  const API_KEY = 'YOUR_OPENWEATHERMAP_API_KEY'; // PUBLIC: Must be replaced with a valid key
+  const API_KEY = 'AIzaSyBfu-HABrOrRW0CIdzpyLV0dlKdBQDVB3c'; // PUBLIC: Must be replaced with a valid key
 
   // UTILITY: Format temperature
   function formatTemperature(tempK) {
