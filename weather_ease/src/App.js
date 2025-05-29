@@ -278,8 +278,7 @@ function App() {
                     <span style={{ color: "#bac5c5" }}>• Searched by city</span>
                   }
                 </div>
-              </div>
-            )}
+              </div>            )}
             {!weather && !loading && !error && (
               <div style={{ color: "#7a7a7a", fontSize: "1.1rem", marginTop: 18, textAlign: "center" }}>
                 Enter a city name above or allow location access to see the current weather.
