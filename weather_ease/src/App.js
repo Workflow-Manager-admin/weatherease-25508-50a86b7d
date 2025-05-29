@@ -12,7 +12,7 @@ function App() {
 
   // PUBLIC: Replace with your OpenWeatherMap API key from https://home.openweathermap.org/api_keys
   // The below is a *sample* key for demonstration only (works for OpenWeatherMap's "test" mode, may not give real data).
-  const API_KEY = 'b6907d289e10d714a6e88b30761fae22';
+  const API_KEY = 'INVALID_KEY';
 
   // UTILITY: Format temperature
   function formatTemperature(tempK) {
