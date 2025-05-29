@@ -10,7 +10,9 @@ function App() {
   const [error, setError] = useState('');
   const [locationUsed, setLocationUsed] = useState(false);
 
-  const API_KEY = 'AIzaSyBfu-HABrOrRW0CIdzpyLV0dlKdBQDVB3c'; // PUBLIC: Must be replaced with a valid key
+  // PUBLIC: Replace with your OpenWeatherMap API key from https://home.openweathermap.org/api_keys
+  // The below is a *sample* key for demonstration only (works for OpenWeatherMap's "test" mode, may not give real data).
+  const API_KEY = 'b6907d289e10d714a6e88b30761fae22';
 
   // UTILITY: Format temperature
   function formatTemperature(tempK) {
@@ -55,14 +57,28 @@ function App() {
       if (!resp.ok) {
         if (resp.status === 404) {
           setError('City not found. Please check the spelling.');
+        } else if (resp.status === 401) {
+          setError('Invalid API key. Please provide a valid OpenWeatherMap API key.');
         } else {
           setError('Could not fetch weather for the specified city.');
         }
         setWeather(null);
       } else {
         const data = await resp.json();
-        setWeather(data);
-        setLocationUsed(false);
+        if (data.cod && data.cod !== 200) {
+          // Handle invalid API key or other OpenWeatherMap error codes
+          if (data.cod === 401 || (typeof data.message === "string" && data.message.toLowerCase().includes("invalid api key"))) {
+            setError('Invalid API key. Please provide a valid OpenWeatherMap API key.');
+          } else if (data.cod === 404) {
+            setError('City not found. Please check the spelling.');
+          } else {
+            setError(data.message || 'Could not fetch weather for the specified city.');
+          }
+          setWeather(null);
+        } else {
+          setWeather(data);
+          setLocationUsed(false);
+        }
       }
     } catch (e) {
       setError('Network error while retrieving city weather.');
